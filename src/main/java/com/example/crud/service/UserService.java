@@ -1,5 +1,6 @@
 package com.example.crud.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,12 +40,27 @@ public class UserService {
         User newUser = userRepository.save(user);
         return convertToUserDTO(newUser);
     }
+
+    public UserDTO updateUser(int id, User user) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User with id " + user.getId() + " not found"));
+                
+        existingUser.setName(user.getName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setUpdatedAt(new Date());
+                
+        return convertToUserDTO(existingUser);
+    }
     
     public UserDTO deleteUser(int id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
-
-        userRepository.delete(user);
+                
+    Date currentDateTime = new Date();                
+        user.setDeletedAt(currentDateTime);
+        user.setUpdatedAt(currentDateTime);
+        user.setActive(false);
 
         return convertToUserDTO(user);
     }

@@ -19,15 +19,15 @@ public class User {
 
     @NotBlank(message="Name is required")
     @Size(min = 2, message="Name must be at least 2 characters")
-    private final String name;
+    private String name;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email is invalid")
-    private final String email;
+    private String email;
 
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters")
-    private final String password;
+    private String password;
 
     private final Date createdAt = new Date();
     private Date updatedAt = new Date();
@@ -50,12 +50,24 @@ public class User {
         return name;
     }
 
+    public String setName(String name) {
+        return this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
 
+    public String setEmail(String email) {
+        return this.email = email;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public String setPassword(String password) {
+        return this.password = password;
     }
 
     public Date getCreatedAt() {

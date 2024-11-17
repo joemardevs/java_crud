@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.example.crud.model.User;
 import com.example.crud.service.UserService;
 
 import jakarta.validation.Valid;
+
 
 
 
@@ -46,6 +48,12 @@ public class UserController {
     public ResponseEntity<ApiResponse<UserDTO>> create(@Valid @RequestBody User user) {
         UserDTO newUser = userServices.createUser(user);
         return ResponseEntity.ok(new ApiResponse<>(201, true, "User created", newUser));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<UserDTO>> update(@PathVariable int id, @Valid @RequestBody User user) {
+        UserDTO updatedUser = userServices.updateUser(id, user);
+        return ResponseEntity.ok(new ApiResponse<>(200, true, "User updated", updatedUser));
     }
     
     @DeleteMapping("/{id}")

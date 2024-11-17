@@ -1,7 +1,6 @@
 package com.example.crud.repository;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +31,6 @@ public class UserRepository  {
         return user;
     }
 
-    public User delete(User user) {
-        Date currentDateTime = new Date();                
-        user.setDeletedAt(currentDateTime);
-        user.setUpdatedAt(currentDateTime);
-        user.setActive(false);
-        
-        return user;
-    }
 
     @PostConstruct
     public void init() {
