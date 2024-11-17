@@ -1,32 +1,49 @@
 package com.example.crud.model;
 
 public class ApiResponse<T> {
-    private final int statusCode;
-    private final boolean status;
-    private final String message;
-    private final T data;
+    private int statusCode;
+    private boolean success;
+    private String message;
+    private T data;
 
-    public ApiResponse(int statusCode, boolean status, String message, T data) {
+    // Constructor
+    public ApiResponse(int statusCode, boolean success, String message, T data) {
         this.statusCode = statusCode;
-        this.status = status;
+        this.success = success;
         this.message = message;
         this.data = data;
     }
 
+    // Getters and Setters
     public int getStatusCode() {
         return statusCode;
     }
 
-    public boolean getStatus() {
-        return status;
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public String getMessage() {
         return message;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public T getData() {
         return data;
     }
 
+    public void setData(T data) {
+        this.data = data;
+    }
 }

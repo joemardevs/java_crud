@@ -39,6 +39,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<UserDTO>> getUser(@PathVariable int id) {
+        
         UserDTO user = userServices.getUserById(id);
         
         return ResponseEntity.ok(new ApiResponse<>(200, true, "User found", user));
