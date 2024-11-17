@@ -43,7 +43,7 @@ public class UserService {
 
     public UserDTO updateUser(int id, User user) {
         User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + user.getId() + " not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
                 
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
