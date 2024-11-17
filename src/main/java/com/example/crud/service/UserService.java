@@ -9,7 +9,6 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
 import com.example.crud.DTO.UserDTO;
-import com.example.crud.exception.user.UserNotFoundException;
 import com.example.crud.model.User;
 import com.example.crud.repository.UserRepository;
 
@@ -31,8 +30,7 @@ public class UserService {
     }
 
     public UserDTO getUserById(int id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+        User user = userRepository.findById(id);
         return convertToUserDTO(user);
     }
     
@@ -42,8 +40,7 @@ public class UserService {
     }
 
     public UserDTO updateUser(int id, User user) {
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+        User existingUser = userRepository.findById(id);
                 
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
@@ -54,8 +51,7 @@ public class UserService {
     }
     
     public UserDTO deleteUser(int id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
+        User user = userRepository.findById(id);
                 
     Date currentDateTime = new Date();                
         user.setDeletedAt(currentDateTime);

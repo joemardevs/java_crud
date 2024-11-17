@@ -2,10 +2,10 @@ package com.example.crud.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.crud.exception.user.UserNotFoundException;
 import com.example.crud.model.User;
 
 import jakarta.annotation.PostConstruct;
@@ -18,12 +18,11 @@ public class UserRepository  {
         return users;
     }
 
-    public Optional<User> findById(int id) {
-        return Optional.ofNullable(
-                users.stream()
-                        .filter(user -> user.getId() == id)
-                        .findFirst()
-                        .orElse(null));
+    public User findById(int id) {
+        return users.stream()
+                    .filter(user -> user.getId() == id)
+                    .findFirst()
+                    .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found"));
     }
     
     public User save(User user) {
